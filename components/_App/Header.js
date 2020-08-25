@@ -14,7 +14,7 @@ const Header = () => {
   Router.onRouteChangeError = () => nProgress.done();
 
   return (
-    <Menu fluid={true} id="menu" inverted>
+    <Menu fluid={true} stackable={true} id="menu" inverted>
       <Container text>
         <Link href="/">
           <Menu.Item header active={isActive("/")}>
@@ -40,7 +40,7 @@ const Header = () => {
             </Menu.Item>
           </Link>
         )}
-        {user && (
+        {user ? (
           <>
             <Link href="/account">
               <Menu.Item header active={isActive("/account")}>
@@ -53,19 +53,22 @@ const Header = () => {
               Logout
             </Menu.Item>
           </>
+        ) : (
+          <>
+            <Link href="/login">
+              <Menu.Item header active={isActive("/login")}>
+                <Icon name="sign in" size="large" />
+                LogIn
+              </Menu.Item>
+            </Link>
+            <Link href="/signup">
+              <Menu.Item header active={isActive("/signup")}>
+                <Icon name="signup" size="large" />
+                SignUP
+              </Menu.Item>
+            </Link>
+          </>
         )}
-        <Link href="/login">
-          <Menu.Item header active={isActive("/login")}>
-            <Icon name="sign in" size="large" />
-            LogIn
-          </Menu.Item>
-        </Link>
-        <Link href="/signup">
-          <Menu.Item header active={isActive("/signup")}>
-            <Icon name="signup" size="large" />
-            SignUP
-          </Menu.Item>
-        </Link>
       </Container>
     </Menu>
   );

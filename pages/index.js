@@ -1,14 +1,15 @@
 import axios from "axios";
-
+import ProductList from "../components/Index/ProductList";
+import baseUrl from "../utils/baseUrl";
 const Home = ({ products }) => {
-  return <>home</>;
+  return <ProductList products={products} />;
 };
 
 //Get initialprops helps us to fetch data on server before page loads
 //Data fetch becomes props available to the component
 Home.getInitialProps = async () => {
   //fetch data on server
-  const url = "http://localhost:3000/api/products";
+  const url = `${baseUrl}/api/products`;
   const res = await axios.get(url);
   return { products: res.data };
 };
