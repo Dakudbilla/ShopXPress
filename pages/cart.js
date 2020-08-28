@@ -1,25 +1,30 @@
 import CardItemList from "../components/Cart/CartItemList";
 import CardSummary from "../components/Cart/CartSummary";
-import { Segment, Header, Icon, Button } from "semantic-ui-react";
-
-const Cart = () => {
-  const user = false;
+import { parseCookies } from "nookies";
+import axios from "axios";
+import baseUrl from "../utils/baseUrl";
+import { Segment } from "semantic-ui-react";
+const Cart = ({ products }) => {
+  console.log(products);
   return (
-    <Segment secondary color="teal" inverted textAlign="center" placeholder>
-      <Header icon>
-        <Icon name="shopping basket" />
-        No Products in your cart. Add Some
-      </Header>
-      <div>
-        {user ? (
-          <Button color="orange">view Products</Button>
-        ) : (
-          <Button color="blue">Login to Add Products</Button>
-        )}
-      </div>
+    <Segment>
+      <CardItemList />
       <CardSummary />
     </Segment>
   );
 };
+Cart.getInitialProps = async (ctx) => {
+  const { token } = parseCookies(ctx);
 
+  if (!token) {
+    console.log("No token");
+    return { products: [] };
+  }
+
+  const url = `${baseUrl}/api/cart`;
+  const payload = { headers: { Authorization: token } };
+
+  const res = await axios.get(url, payload);
+  return { products: res.data };
+};
 export default Cart;
