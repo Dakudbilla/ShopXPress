@@ -11,6 +11,8 @@ const Header = ({ user }) => {
   //check if user is 'admin' user
 
   const isAdmin = user && user.role === "admin";
+
+  const isRoorOrAdmin = isAdmin || isRoot;
   const isActive = (route) => {
     return route === router.pathname;
   };
@@ -37,15 +39,14 @@ const Header = ({ user }) => {
             Cart
           </Menu.Item>
         </Link>
-        {!isRoot ||
-          (isAdmin && (
-            <Link href="/create">
-              <Menu.Item header active={isActive("/create")}>
-                <Icon name="add square" size="large" />
-                Create
-              </Menu.Item>
-            </Link>
-          ))}
+        {isRoorOrAdmin && (
+          <Link href="/create">
+            <Menu.Item header active={isActive("/create")}>
+              <Icon name="add square" size="large" />
+              Create
+            </Menu.Item>
+          </Link>
+        )}
         {user ? (
           <>
             <Link href="/account">

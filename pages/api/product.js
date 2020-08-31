@@ -1,7 +1,7 @@
 import Product from "../../models/Product";
 
 import connectDb from "../../utils/connectDb";
-
+import Cart from "../../models/Cart";
 connectDb();
 export default async (req, res) => {
   switch (req.method) {
@@ -26,9 +26,6 @@ const handlePostRequest = async (req, res) => {
     return res.status(400).send("Product missing one or more fields");
   }
   try {
-    console.log("I run");
-    // const newProduct = ;
-
     const product = new Product({
       name,
       price,
@@ -46,7 +43,15 @@ const handlePostRequest = async (req, res) => {
 const handleDeleteRequest = async (req, res) => {
   const { _id } = req.query;
   try {
+    //Delete by id
     await Product.findOneAndDelete({ _id });
+    //Remove product from all carts referenced as 'product
+    //This is called cascade deleting(deleting from many documents)
+
+    await Cart.updateMany(
+      { "products.product": _id },
+      { $pull: { products: { product: _id } } }
+    );
     res.status(204).json({});
   } catch (err) {
     console.error(err.message, "Failed");

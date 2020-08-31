@@ -14,30 +14,28 @@ const AddProductToCart = ({ user, productId }) => {
   const [loading, setLoading] = useState(false);
   const Router = useRouter();
   useEffect(() => {
+    let timeOut;
     if (success) {
-      setTimeout(() => setSuccess(false), 3000);
+      timeOut = setTimeout(() => setSuccess(false), 3000);
     }
+    return () => {
+      clearTimeout(timeOut);
+    };
   }, [success]);
 
   ///Add product to cart
   const handleAddProductToCart = async () => {
     try {
       setLoading(true);
-      const url = `${baseUrl}/cart`;
+      const url = `${baseUrl}/api/cart`;
       const token = Cookie.get("token");
       const payload = { quantity, productId };
 
       const headers = {
         headers: { Authorization: token },
-        "Access-Control-Allow-Origin": "*",
       };
-      console.log("I called");
-      await fetch(url, {
-        method: "PUT",
-        headers,
-        body: payload,
-      });
-      //await axios.put(url, payload, headers);
+
+      await axios.put(url, payload, headers);
       setSuccess(true);
     } catch (err) {
       catchErrors(err, window.alert);
