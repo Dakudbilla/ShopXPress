@@ -1,5 +1,11 @@
 {
   "name": "reactreserve",
-  "alias": "<insert-your-alias>.now.sh",
-  "version": 1
+  "alias": "shopXpress.now.sh",
+  "version": 2,
+  "env": {
+    "MONGO_SRV": "mongodb+srv://akuddev:IMlA6cYQNbJV15iE@reactreserve.t2fnw.mongodb.net/reactReserve?retryWrites=true&w=majority",
+    "JWT_SECRET": "akuddevqsce",
+    "CLOUDINARY_URL": "https://api.cloudinary.com/v1_1/akuddev/image/upload",
+    "STRIPE_SECRET_KEY": "sk_test_51HMBc8Jm1uEKjr29BxhXv5mSgL6XhUOJyPvNoHadrJ1leUSCXD2AYmIvonwit6RFjPRK5976sCRcZEHZJfbjaQwq00NqaNNKrh"
+  }
 }
