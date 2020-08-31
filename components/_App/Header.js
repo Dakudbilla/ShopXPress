@@ -30,7 +30,7 @@ const Header = ({ user }) => {
               src="/static/logo.svg"
               style={{ marginRight: "1em" }}
             />
-            ReactReserve
+            ShopPress
           </Menu.Item>
         </Link>
         <Link href="/cart">
