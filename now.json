@@ -1,6 +1,6 @@
 {
   "name": "shopXPress",
-  "alias": "shopXpress.now.sh",
+  "alias": "shopx-press.now.sh",
   "version": 2,
   "env": {
     "MONGO_SRV": "mongodb+srv://akuddev:IMlA6cYQNbJV15iE@reactreserve.t2fnw.mongodb.net/reactReserve?retryWrites=true&w=majority",

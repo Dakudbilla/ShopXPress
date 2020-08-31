@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://shopXPress.now.sh"
+    ? "https://shopx-press.now.sh"
     : "http://localhost:3000";
 
 export default baseUrl;
